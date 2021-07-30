@@ -18,13 +18,24 @@ public class heroe extends Actor
     {
       moveAndTurn();
       eat();
+      //contacto con bomba
+        
+        if(isTouching(bomba.class))
+        {
+            removeTouching(bomba.class);
+            thisGame.lives--;
+        }
+        
+        if (thisGame.lives == 0){
+        Greenfoot.setWorld(new GameOver());
+        }
      
       
     }
     public void moveAndTurn()  
     {
      
-   
+    // Movimiento del basurero
       if (Greenfoot.isKeyDown("left"))
       {
        setLocation(getX()-3,getY());
@@ -43,6 +54,7 @@ public class heroe extends Actor
       }  
     }
     public void eat()
+    //Aqui el basurero comera la banana
     {
       Actor banano;
       banano = getOneObjectAtOffset(0, 0, banano.class);
@@ -51,8 +63,9 @@ public class heroe extends Actor
           World world;
           world = getWorld();
           world.removeObject(banano);
-          thisGame.score += 4;  
+          thisGame.score += 5;  
           
       }
+      
     }
 }
